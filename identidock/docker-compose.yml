@@ -1,0 +1,21 @@
+dnmonster:
+  image : amouat/dnmonster:1.0
+  ports:
+          - "8080:8080"
+
+redis:
+  image: redis
+  ports:
+          - "6379:6379"
+
+identidock:
+  build: . 
+  ports:
+   - "5000:5000"
+  environment:
+    ENV: DEV 
+  volumes:
+    - ./app:/app
+  links:
+    - dnmonster
+    - redis
